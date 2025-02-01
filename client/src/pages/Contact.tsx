@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
@@ -23,31 +23,42 @@ export default function Contact() {
     };
 
     const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1
+      threshold: 0.1,
+      rootMargin: '50px'
     });
 
-    document.querySelectorAll('.section-content, .contact-card, .contact-form').forEach(
-      element => observer.observe(element)
-    );
+    const elements = document.querySelectorAll('.section-content, .contact-card, .contact-form');
+    elements.forEach(element => observer.observe(element));
 
+    // Smooth scroll to form if hash is present
     if (window.location.hash === '#contact-form') {
-      const formElement = document.querySelector('.contact-form-section');
-      formElement?.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const formElement = document.querySelector('.contact-form-section');
+        formElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Form validation
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Please fill in all required fields');
+      return;
+    }
     console.log(formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
@@ -71,31 +82,37 @@ export default function Contact() {
           </div>
           <div className="contact-cards">
             <div className="contact-card">
-              <div className='contact-card-icon'>
-                <div className='icon-align'><MapPin size={32} /></div>
+              <div className="contact-card-icon">
+                <div className="icon-align"><MapPin size={32} aria-hidden="true" /></div>
                 <div>
                   <h3>Visit Us</h3>
-                  <p> 3703, JBC 2, Cluster-V</p>
-          <p>Jumeirah Lakes Towers</p>
-          <p>P.O. Box 338455, Dubai, UAE</p>
+                  <address>
+                    3703, JBC 2, Cluster-V<br />
+                    Jumeirah Lakes Towers<br />
+                    P.O. Box 338455, Dubai, UAE
+                  </address>
                 </div>
               </div>
             </div>
             <div className="contact-card">
-              <div className='contact-card-icon'>
-                <div className='icon-align'><Mail size={32} /></div>
+              <div className="contact-card-icon">
+                <div className="icon-align"><Mail size={32} aria-hidden="true" /></div>
                 <div>
                   <h3>Email Us</h3>
-                  <p>Email: admin@auspicebulk.com</p>
+                  <p>
+                    <a href="mailto:admin@auspicebulk.com">admin@auspicebulk.com</a>
+                  </p>
                 </div>
               </div>
             </div>
             <div className="contact-card">
-              <div className='contact-card-icon'>
-                <div className='icon-align'><Phone size={32} /></div>
+              <div className="contact-card-icon">
+                <div className="icon-align"><Phone size={32} aria-hidden="true" /></div>
                 <div>
                   <h3>Call Us</h3>
-                  <p>Phone: +971 54 219 2779</p>
+                  <p>
+                    <a href="tel:+971542192779">+971 54 219 2779</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -107,48 +124,50 @@ export default function Contact() {
         <div className="section-content">
           <div className="form-container">
             <div className="form-header">
-              <MessageSquare size={32} />
+              <MessageSquare size={32} aria-hidden="true" />
               <h2>Send Us a Message</h2>
               <p>Fill out the form below and we'll get back to you shortly</p>
             </div>
-            <form onSubmit={handleSubmit} className="contact-form">
+            <form onSubmit={handleSubmit} className="contact-form" noValidate>
               <div className="form-grid">
                 <div className="form-group">
-                  <label htmlFor="name">Full Name</label>
+                  <label htmlFor="name">Full Name *</label>
                   <input
-                  placeholder='Enter your full name'
+                    placeholder="Enter your full name"
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="email">Email Address *</label>
                   <input
-                  placeholder='Enter your email address'
+                    placeholder="Enter your email address"
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                   />
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number</label>
                   <input
-                  placeholder='Enter your phone number'
+                    placeholder="Enter your phone number"
                     type="tel"
                     id="phone"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    required
+                    aria-required="false"
                   />
                 </div>
 
@@ -159,7 +178,7 @@ export default function Contact() {
                     name="inquiryType"
                     value={formData.inquiryType}
                     onChange={handleChange}
-                    required
+                    aria-required="false"
                   >
                     <option value="">Select Inquiry Type</option>
                     <option value="business-setup">Business Setup</option>
@@ -170,14 +189,15 @@ export default function Contact() {
                 </div>
 
                 <div className="form-group full-width">
-                  <label htmlFor="message">Message</label>
+                  <label htmlFor="message">Message *</label>
                   <textarea
-                  placeholder='Enter your message'
+                    placeholder="Enter your message"
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                   ></textarea>
                 </div>
               </div>
@@ -193,9 +213,12 @@ export default function Contact() {
       <section className="map-section">
         <div className="section-content">
           <div className="map-container">
-              <iframe src="https://maps.google.com/maps?width=2000&amp;height=550&amp;hl=en&amp;q=3703, JBC 2, Cluster-V  Jumeirah Lakes Towers  P.O. Box 338455, Dubai, UAE&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-              </iframe>
-        </div>      
+            <iframe
+              src="https://maps.google.com/maps?width=2000&amp;height=550&amp;hl=en&amp;q=3703, JBC 2, Cluster-V  Jumeirah Lakes Towers  P.O. Box 338455, Dubai, UAE&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              title="Our Location"
+              loading="lazy"
+            ></iframe>
+          </div>
         </div>
       </section>
     </div>

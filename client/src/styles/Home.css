@@ -33,7 +33,25 @@ section {
   padding-top: var(--navbar-height, 80px);
   position: relative;
   overflow: hidden;
-  margin-bottom: -1px; /* Ensure no gap with footer */
+  margin-bottom: -1px;
+}
+
+/* Animated Logo */
+.animated-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 100%;
+  max-width: 1000rem;
+  height: auto;
+  opacity: 0.35;
+}
+
+.animated-logo img {
+  width: 100%;
+  height: auto;
 }
 
 .hero-section::before,
@@ -100,7 +118,7 @@ section {
 }
 
 .anchor-icon {
-  position :absolute;
+  position: absolute;
   top: 5%;
   color: #40c4ff;
   margin-bottom: 1rem;
@@ -108,15 +126,14 @@ section {
 }
 
 .coming-soon-text {
-  font-family: 'futura'; 
+  font-family: 'futura';
   src: url('fonts/FuturaPTExtraBoldOblique.otf') format('otf');
   font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 800;
   color: #40c4ff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
-               0 0 20px rgba(64, 196, 255, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(64, 196, 255, 0.5);
   margin: 0;
   line-height: 1.2;
 }
@@ -148,7 +165,7 @@ section {
 }
 
 .wave-parallax > use {
-  animation: wave-move 25s cubic-bezier(.55,.5,.45,.5) infinite;
+  animation: wave-move 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 }
 
 .wave-parallax > use:nth-child(1) {
@@ -202,7 +219,8 @@ section {
 }
 
 @keyframes blink {
-  from, to {
+  from,
+  to {
     opacity: 1;
   }
   50% {
@@ -211,7 +229,8 @@ section {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -290,7 +309,7 @@ section {
   .hero-content {
     padding: 0 1rem;
   }
-
+  .c
   .waves-container {
     height: 100px;
   }
@@ -299,13 +318,17 @@ section {
   .hero-section::after {
     background-position: center center;
   }
+
+  .animated-logo {
+    max-width: 800rem;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-section {
     min-height: 100vh;
-    height: 100vh; /* Force full height */
-    margin-bottom: 0; /* Remove any margin */
+    height: 100vh;
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -314,7 +337,7 @@ section {
   .hero-content {
     width: 100%;
     padding: 1rem;
-    margin: auto 0; /* Center vertically */
+    margin: auto 0;
   }
 
   .cta-button {
@@ -334,6 +357,10 @@ section {
 
   .hero-section p {
     padding: 0 0.5rem;
+  }
+
+  .animated-logo {
+    max-width: 400rem;
   }
 }
 
