@@ -3,6 +3,8 @@ import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
 import '../styles/Contact.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -45,11 +47,54 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     // Form validation
     if (!formData.name || !formData.email || !formData.message) {
-      alert('Please fill in all required fields');
+      toast.error('Please fill in all required fields', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       return;
     }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address', {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
+    // Phone validation (optional field)
+    if (formData.phone && !/^\+?[\d\s-]{8,}$/.test(formData.phone)) {
+      toast.warning('Please enter a valid phone number', {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
+    // If all validations pass, show success message
+    toast.success('Message sent successfully! We will contact you soon.', {
+      position: "top-right",
+      autoClose: 3000,
+    });
+
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      inquiryType: '',
+      message: ''
+    });
+
     console.log(formData);
   };
 
