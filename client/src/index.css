@@ -5,13 +5,17 @@
     font-family: 'futura'; 
     src: url('fonts/FuturaPTBook.otf') format('otf'),
 }
+
 .app {
+
     /* Add !important if needed */
+
     position: relative !important;
     min-height: 100vh !important;
   }
   
   /* Ensure Toastify container doesn't interfere with layout */
+
   .Toastify {
     position: fixed;
     z-index: 9999;

@@ -22,8 +22,8 @@ function App() {
       pauseOnHover
       theme="dark"
       aria-label="Toast Notifications"
-      style={{ zIndex: 9999 }}  // Add this line
-      containerId="toast-container" // Add this line
+      style={{ zIndex: 9999 }}  
+      containerId="toast-container" 
     />
       <Router>
         <ScrollToTopOnNav />
