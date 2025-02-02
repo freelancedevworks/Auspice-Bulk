@@ -130,10 +130,10 @@ export default function Contact() {
               <div className="contact-card-icon">
                 <div className="icon-align"><MapPin size={32} aria-hidden="true" /></div>
                 <div>
-                  <h3>Visit Us</h3>
+                  <h3>Post to Us</h3>
                   <address>
-                    3703, JBC 2, Cluster-V<br />
-                    Jumeirah Lakes Towers<br />
+                    {/* 3703, JBC 2, Cluster-V<br />
+                    Jumeirah Lakes Towers<br /> */}
                     P.O. Box 338455, Dubai, UAE
                   </address>
                 </div>
@@ -150,7 +150,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-            <div className="contact-card">
+            {/* <div className="contact-card">
               <div className="contact-card-icon">
                 <div className="icon-align"><Phone size={32} aria-hidden="true" /></div>
                 <div>
@@ -160,7 +160,7 @@ export default function Contact() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
