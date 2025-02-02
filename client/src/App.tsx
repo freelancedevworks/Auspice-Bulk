@@ -11,8 +11,8 @@ function App() {
   return (
     <>
       <ToastContainer
-        position="top-right"
-        autoClose={3000}
+        position="bottom-center"
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -21,9 +21,9 @@ function App() {
         draggable
         pauseOnHover
         theme="dark"
+        limit={3}
         aria-label="Toast Notifications"
-        style={{ zIndex: 9999 }}  // Add this line
-        containerId="toast-container" // Add this line
+        style={{ zIndex: 9999 }}
       />
       <Router>
         <ScrollToTopOnNav />

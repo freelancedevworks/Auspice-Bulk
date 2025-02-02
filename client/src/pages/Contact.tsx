@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, MessageSquare } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
 import '../styles/Contact.css';
@@ -10,6 +10,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    countryCode: '+971', // Default UAE code
     phone: '',
     inquiryType: '',
     message: ''
@@ -51,12 +52,13 @@ export default function Contact() {
     // Form validation
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Please fill in all required fields', {
-        position: "top-right",
-        autoClose: 3000,
+        position: "bottom-center",
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        theme: "dark"
       });
       return;
     }
@@ -64,32 +66,39 @@ export default function Contact() {
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      toast.error('Please enter a valid email address', {
-        position: "top-right",
-        autoClose: 3000,
+      toast.error('Invalid email format. Please check your email address', {
+        position: "bottom-center",
+        autoClose: 2000,
+        theme: "dark"
       });
       return;
     }
 
     // Phone validation (optional field)
-    if (formData.phone && !/^\+?[\d\s-]{8,}$/.test(formData.phone)) {
-      toast.warning('Please enter a valid phone number', {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      return;
+    if (formData.phone) {
+      const fullPhone = `${formData.countryCode}${formData.phone}`;
+      if (!/^\+\d{1,4}\d{8,}$/.test(fullPhone)) {
+        toast.warning('Please enter a valid phone number', {
+          position: "bottom-center",
+          autoClose: 2000,
+          theme: "dark"
+        });
+        return;
+      }
     }
 
     // If all validations pass, show success message
-    toast.success('Message sent successfully! We will contact you soon.', {
-      position: "top-right",
-      autoClose: 3000,
+    toast.success('Thank you! Your message has been sent successfully.', {
+      position: "bottom-center",
+      autoClose: 2000,
+      theme: "dark"
     });
 
     // Reset form
     setFormData({
       name: '',
       email: '',
+      countryCode: '+971',
       phone: '',
       inquiryType: '',
       message: ''
@@ -205,15 +214,27 @@ export default function Contact() {
 
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number</label>
-                  <input
-                    placeholder="Enter your phone number"
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    aria-required="false"
-                  />
+                  <div className="phone-input-container">
+                    <input
+                      type="text"
+                      id="countryCode"
+                      name="countryCode"
+                      value={formData.countryCode}
+                      onChange={handleChange}
+                      placeholder="+971"
+                      className="country-code-input"
+                      maxLength={4}
+                    />
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Phone number"
+                      className="phone-number-input"
+                    />
+                  </div>
                 </div>
 
                 <div className="form-group">
