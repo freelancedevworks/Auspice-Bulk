@@ -21,7 +21,9 @@ function App() {
         draggable
         pauseOnHover
         theme="dark"
-                aria-label="Toast Notifications"
+        aria-label="Toast Notifications"
+        style={{ zIndex: 9999 }}  // Add this line
+        containerId="toast-container" // Add this line
       />
       <Router>
         <ScrollToTopOnNav />
