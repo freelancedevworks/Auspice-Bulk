@@ -21,18 +21,19 @@ export default function Footer() {
 
           <div className='icon-con'>
           <MapPinHouse size={48} className="mappinhouse-icon" />
-          <div><p> 3703, JBC 2, Cluster-V</p>
-          <p>Jumeirah Lakes Towers</p>
+          <div>
+            {/* <p> 3703, JBC 2, Cluster-V</p>
+            <p>Jumeirah Lakes Towers</p> */}
           <p>P.O. Box 338455, Dubai, UAE</p></div>
           </div>
           <div className='icon-con'>
           <Mail size={48} className="mail-icon" />
           <div><p>Email: admin@auspicebulk.com</p></div>
           </div>
-          <div className='icon-con'>
+          {/* <div className='icon-con'>
           <Phone size={48} className="phone-icon" />
           <div><p>Phone: +971 54 219 2779</p></div>
-          </div>
+          </div> */}
         </div>
 
         <div className="footer-section ">
