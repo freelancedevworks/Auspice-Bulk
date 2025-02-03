@@ -46,7 +46,7 @@ section {
   width: 100%;
   max-width: 50rem;
   height: auto;
-  opacity: 0;
+  opacity: 1;
 }
 
 .animated-logo img {
@@ -112,6 +112,7 @@ section {
 }
 
 .sailing-soon {
+  padding-top: 5rem;
   margin-bottom: 2rem;
   animation: fadeInDown 1s ease-out;
   opacity: 1;
@@ -120,7 +121,7 @@ section {
   align-items: center;
 }
 
-.sailing-ship {
+/* .sailing-ship {
   position: relative;
   width: 100%;
   height: 60px;
@@ -159,7 +160,7 @@ section {
     transform: translate(calc(-50vw - 100px), -50%) scaleX(-1);
     opacity: 0;
   }
-}
+} */
 
 .anchor-icon {
   color: #40c4ff;
@@ -373,13 +374,13 @@ section {
     max-width: 600px;
   }
 
-  .bulk-ship {
+  /* .bulk-ship {
     width: 60px;
   }
 
   .sailing-ship {
     height: 50px;
-  }
+  } */
   
 }
 
@@ -422,13 +423,13 @@ section {
     max-width: 400px;
   }
 
-  .bulk-ship {
+  /* .bulk-ship {
     width: 50px;
   }
 
   .sailing-ship {
     height: 40px;
-  }
+  } */
   .anchor-icon{
     height: 25px;
     width: 25px;
