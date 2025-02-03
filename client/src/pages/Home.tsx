@@ -78,13 +78,13 @@ export default function Home() {
         <div className="section-content">
           <div className="hero-content">
             <h1>Navigating Trust, Delivering Excellence</h1>
-            <div className="sailing-ship">
+            {/* <div className="sailing-ship">
               <img 
                 src="https://i.imgur.com/3mWkVHk.png" 
                 alt="Bulk Ship"
                 className="bulk-ship"
               />
-            </div>
+            </div> */}
             <div className="sailing-soon">
               <Anchor size={38} className="anchor-icon" />
               <h2 className="coming-soon-text">
