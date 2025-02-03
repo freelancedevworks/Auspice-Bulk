@@ -106,7 +106,6 @@ export default function Contact() {
 
     console.log(formData);
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -246,11 +245,11 @@ export default function Contact() {
                     onChange={handleChange}
                     aria-required="false"
                   >
-                    <option value="">Select Inquiry Type</option>
-                    <option value="business-setup">Business Setup</option>
-                    <option value="trade-license">Trade License</option>
-                    <option value="visa-services">Visa Services</option>
-                    <option value="other">Other</option>
+                    <option className="inquiry-dropdown" value="">Select Inquiry Type</option>
+                    <option className="inquiry-dropdown" value="business-setup">Business Setup</option>
+                    <option className="inquiry-dropdown" value="trade-license">Trade License</option>
+                    <option className="inquiry-dropdown" value="visa-services">Visa Services</option>
+                    <option className="inquiry-dropdown" value="other">Other</option>
                   </select>
                 </div>
 
