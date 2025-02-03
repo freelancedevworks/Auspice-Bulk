@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Mail, MapPin, MessageSquare } from 'lucide-react';
-import TypeWriter from '../components/TypeWriter';
-import ScrollToTop from '../components/ScrollToTop';
-import '../styles/Contact.css';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from '../components/ScrollToTop';
+import TypeWriter from '../components/TypeWriter';
+import '../styles/Contact.css';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ export default function Contact() {
     message: ''
   });
 
+  
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {

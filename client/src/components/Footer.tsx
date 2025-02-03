@@ -1,6 +1,6 @@
+import { Mail, MapPinHouse } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
-import { Phone, Mail, MapPinHouse} from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="footer">

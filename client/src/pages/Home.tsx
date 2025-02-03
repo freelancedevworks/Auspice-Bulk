@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { Anchor, ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Anchor } from 'lucide-react';
-import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
+import TypeWriter from '../components/TypeWriter';
 import '../styles/Home.css';
 
 export default function Home() {
   const navigate = useNavigate();
   const [key, setKey] = useState(0);
-  const [isHeadingVisible, setIsHeadingVisible] = useState(false);
+  // const [isHeadingVisible, setIsHeadingVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
