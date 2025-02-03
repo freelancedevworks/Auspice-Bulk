@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
@@ -97,7 +97,6 @@ export default function Contact() {
 
     console.log(formData);
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -130,8 +129,8 @@ export default function Contact() {
               <div className="contact-card-icon">
                 <div className="icon-align"><MapPin size={32} aria-hidden="true" /></div>
                 <div>
-                  <h3>Post to Us</h3>
-                  <address>
+                  <h3>Post Us</h3>
+                  <address className='address'>
                     {/* 3703, JBC 2, Cluster-V<br />
                     Jumeirah Lakes Towers<br /> */}
                     P.O. Box 338455, Dubai, UAE
@@ -225,11 +224,11 @@ export default function Contact() {
                     onChange={handleChange}
                     aria-required="false"
                   >
-                    <option value="">Select Inquiry Type</option>
-                    <option value="business-setup">Business Setup</option>
-                    <option value="trade-license">Trade License</option>
-                    <option value="visa-services">Visa Services</option>
-                    <option value="other">Other</option>
+                    <option className="inquiry-dropdown" value="">Select Inquiry Type</option>
+                    <option className="inquiry-dropdown" value="business-setup">Business Setup</option>
+                    <option className="inquiry-dropdown" value="trade-license">Trade License</option>
+                    <option className="inquiry-dropdown" value="visa-services">Visa Services</option>
+                    <option className="inquiry-dropdown" value="other">Other</option>
                   </select>
                 </div>
 

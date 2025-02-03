@@ -39,14 +39,14 @@ section {
 /* Animated Logo */
 .animated-logo {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
   width: 100%;
-  max-width: 1000rem;
+  max-width: 50rem;
   height: auto;
-  opacity: 0;
+  opacity: 1;
 }
 
 .animated-logo img {
@@ -104,7 +104,7 @@ section {
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 1rem;
   opacity: 1;
@@ -115,11 +115,53 @@ section {
   margin-bottom: 2rem;
   animation: fadeInDown 1s ease-out;
   opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sailing-ship {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  margin: 1rem 0;
+  overflow: visible;
+}
+
+.bulk-ship {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: shipSailing 7s linear infinite;
+  filter: brightness(0) saturate(100%) invert(80%) sepia(32%) saturate(4985%)
+    hue-rotate(165deg) brightness(101%) contrast(101%);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+@keyframes shipSailing {
+  0% {
+    transform: translate(calc(50vw + 100px), -50%) scaleX(-1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translate(calc(40vw), -50%) scaleX(-1);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(calc(-40vw), -50%) scaleX(-1);
+  }
+  100% {
+    transform: translate(calc(-50vw - 100px), -50%) scaleX(-1);
+    opacity: 0;
+  }
 }
 
 .anchor-icon {
-  position: absolute;
-  top: 5%;
   color: #40c4ff;
   margin-bottom: 1rem;
   animation: float 3s ease-in-out infinite;
@@ -128,7 +170,7 @@ section {
 .coming-soon-text {
   font-family: 'futura';
   src: url('fonts/FuturaPTExtraBoldOblique.otf') format('otf');
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-size: 40px;
   font-weight: 800;
   color: #40c4ff;
   text-transform: uppercase;
@@ -136,10 +178,12 @@ section {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(64, 196, 255, 0.5);
   margin: 0;
   line-height: 1.2;
+  padding: 2rem;
 }
 
 .hero-section h1 {
   font-size: clamp(2rem, 5vw, 3rem);
+  padding-bottom: 5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   animation: fadeInUp 1s ease-out;
@@ -309,7 +353,13 @@ section {
   .hero-content {
     padding: 0 1rem;
   }
-  .c
+  .anchor-icon{
+    width: 35px;
+    height:35px;
+  }
+  .coming-soon-text{
+    font-size: 25px
+  }
   .waves-container {
     height: 100px;
   }
@@ -320,8 +370,17 @@ section {
   }
 
   .animated-logo {
-    max-width: 800rem;
+    max-width: 600px;
   }
+
+  .bulk-ship {
+    width: 60px;
+  }
+
+  .sailing-ship {
+    height: 50px;
+  }
+  
 }
 
 @media (max-width: 480px) {
@@ -346,7 +405,7 @@ section {
   }
 
   .coming-soon-text {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: 15px
   }
 
   .waves-container {
@@ -360,7 +419,19 @@ section {
   }
 
   .animated-logo {
-    max-width: 400rem;
+    max-width: 400px;
+  }
+
+  .bulk-ship {
+    width: 50px;
+  }
+
+  .sailing-ship {
+    height: 40px;
+  }
+  .anchor-icon{
+    height: 25px;
+    width: 25px;
   }
 }
 

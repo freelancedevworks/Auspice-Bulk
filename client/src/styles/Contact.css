@@ -7,8 +7,8 @@
 /* Hero Section */
 .contact .hero-section-contact {
   min-height: 60vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url("https://plus.unsplash.com/premium_photo-1661963273587-85900421377f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background: linear-gradient(rgba(180, 180, 180, 0), rgba(180, 180, 180, 0)),
+    url("https://images.unsplash.com/photo-1693021316599-cf3a3345161c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   display: flex;
   align-items: center;
   color: white;
@@ -21,6 +21,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+h1 h2 h3 p {
+  font-weight: 500 ;
+  
 }
 
 @media (max-width: 768px) {
@@ -66,7 +70,7 @@
 
 /* Contact Info Section */
 .contact-info-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+  background: linear-gradient(rgba(110, 110, 110, 0.658), rgba(190, 190, 190, 0)),
     url('https://images.unsplash.com/photo-1601311852860-1d8f42381551?q=80&w=1975&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-position: center;
@@ -173,8 +177,8 @@
 
 /* Form Section */
 .contact-form-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url('https://plus.unsplash.com/premium_photo-1661962960410-9db320f6769f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background: linear-gradient(rgba(34, 34, 34, 0.671), rgba(34, 34, 34, 0.671)),
+    url('https://images.unsplash.com/photo-1598194501777-edbff942e501?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -193,9 +197,7 @@
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
-              rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(172, 171, 171, 0.473) 0px 19px 38px, rgba(128, 128, 128, 0.479) 0px 15px 12px;
   padding: clamp(1.5rem, 4vw, 3rem);
   border-radius: 10px;
 }
@@ -287,7 +289,9 @@
   min-height: 100px;
   max-height: 300px;
 }
-
+.inquiry-dropdown{
+  background: #437b99;
+}
 .submit-button {
   width: 100%;
   padding: clamp(0.875rem, 2vw, 1rem);
@@ -321,8 +325,7 @@
 .map-container {
   height: clamp(300px, 50vw, 450px);
   overflow: hidden;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   border-radius: 10px;
 }
 

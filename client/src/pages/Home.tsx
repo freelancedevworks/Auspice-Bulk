@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Anchor } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
@@ -7,25 +7,56 @@ import '../styles/Home.css';
 
 export default function Home() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [key, setKey] = useState(0);
-
-  useEffect(() => {
-    // Re-trigger animation when visiting the home page
-    setKey(prev => prev + 1);
-  }, [location.pathname]);
+  const [isHeadingVisible, setIsHeadingVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const heroSection = document.querySelector('.hero-section');
+      const heading = document.querySelector('.hero-section h1');
+      
       if (heroSection) {
         const scrolled = window.scrollY > window.innerHeight * 0.2;
-        heroSection.classList.toggle('scrolled', scrolled);
+        if (scrolled) {
+          heroSection.classList.add('scrolled');
+        } else {
+          heroSection.classList.remove('scrolled');
+        }
+      }
+
+      if (heading) {
+        const rect = heading.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+        const isFadingOut = rect.top < window.innerHeight * 0.2;
+
+        if (isVisible && !isFadingOut) {
+          heading.classList.add('visible');
+          heading.classList.remove('fade-out');
+        } else if (isFadingOut) {
+          heading.classList.remove('visible');
+          heading.classList.add('fade-out');
+        } else {
+          heading.classList.remove('visible', 'fade-out');
+        }
       }
     };
 
+    let timeoutId: NodeJS.Timeout;
+
+    const resetAnimation = () => {
+      setKey(prev => prev + 1);
+      timeoutId = setTimeout(resetAnimation, 5000);
+    };
+
+    resetAnimation();
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Trigger initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const handleContactClick = () => {
@@ -33,11 +64,11 @@ export default function Home() {
   };
 
   return (
-    <div key={key} className="home">
+    <div className="home">
       <ScrollToTop />
       <section className="hero-section">
         <div className="hero-overlay"></div>
-        <div className="animated-logo">
+        <div key={key} className="animated-logo">
           <img 
             src="https://i.imgur.com/P8ZgtRc.png" 
             alt="Animated Logo" 
@@ -46,13 +77,20 @@ export default function Home() {
         </div>
         <div className="section-content">
           <div className="hero-content">
+            <h1>Navigating Trust, Delivering Excellence</h1>
+            <div className="sailing-ship">
+              <img 
+                src="https://i.imgur.com/3mWkVHk.png" 
+                alt="Bulk Ship"
+                className="bulk-ship"
+              />
+            </div>
             <div className="sailing-soon">
-              <Anchor size={48} className="anchor-icon" />
+              <Anchor size={38} className="anchor-icon" />
               <h2 className="coming-soon-text">
                 Sailing <TypeWriter text="Soon..." speed={100} delay={3500} />
               </h2>
             </div>
-            <h1>Navigating Trust, Delivering Excellence</h1>
             <button 
               className="cta-button" 
               onClick={handleContactClick}
