@@ -4,7 +4,7 @@ interface TypeWriterProps {
   text: string;
   speed?: number;
 }
-
+//final coming soon UI
 export default function TypeWriter({ text, speed = 100 }: TypeWriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
