@@ -17,5 +17,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": [
+    "src/**/*",
+    "server/migrations/**/*"  // Include the migrations directory
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

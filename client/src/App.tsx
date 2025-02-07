@@ -6,8 +6,21 @@ import Contact from './pages/Contact';
 import ScrollToTopOnNav from './components/ScrollToTopOnNav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLogin from './admin/pages/AdminLogin';
+import { useLocation } from 'react-router-dom';
+import AdminDashboard from './admin/pages/AdminDashboard';
 
 function App() {
+  return (
+    <Router>
+      <Main />
+    </Router>
+  );
+}
+
+function Main() {
+  const location = useLocation(); // Get the current location
+
   return (
     <>
       <ToastContainer
@@ -25,19 +38,20 @@ function App() {
         aria-label="Toast Notifications"
         style={{ zIndex: 9999 }}
       />
-      <Router>
-        <ScrollToTopOnNav />
-        <div className="app">
-          <Navbar />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
+      <ScrollToTopOnNav />
+      <div className="app">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          </Routes>
+        </main>
+        {/* Render Footer only if not on the admin page */}
+        {location.pathname !== '/admin' && location.pathname !== '/admin/dashboard' && <Footer />}
+      </div>
     </>
   );
 }
