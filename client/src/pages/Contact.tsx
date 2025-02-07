@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from '../components/ScrollToTop';
 import TypeWriter from '../components/TypeWriter';
 import '../styles/Contact.css';
-
+//final coming soon UI
 interface FormData {
   name: string;
   email: string;

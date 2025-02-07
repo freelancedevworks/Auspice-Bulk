@@ -1,12 +1,12 @@
 import { Mail, MapPinHouse } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
+
+//final coming soon UI
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-       
-
         <div className="footer-section">
           <h4 className='heading-contact'>Contact</h4>
 

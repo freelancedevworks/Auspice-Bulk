@@ -4,7 +4,7 @@ import { ArrowRight, Anchor } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
 import '../styles/Home.css';
-
+//final coming soon UI
 export default function Home() {
   const navigate = useNavigate();
   const heroSectionRef = useRef<HTMLElement>(null);
