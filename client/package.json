@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "npm install && tsc -b && ./node_modules/.bin/vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -36,7 +36,7 @@
     "globals": "^15.14.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
+    "vite": "^6.1.0"
   },
   "description": "AuspiceBulk DMCC client application",
   "main": "eslint.config.js",
