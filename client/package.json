@@ -38,7 +38,7 @@
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5"
   },
-  "description": "AuspiceBulk DMCC client application - A modern React application built with Vite and TypeScript",
+  "description": "AuspiceBulk DMCC client application",
   "main": "eslint.config.js",
   "keywords": [],
   "author": "",
