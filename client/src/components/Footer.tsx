@@ -34,6 +34,9 @@ export default function Footer() {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/materials">Materials</Link>
+            </li>
+            <li>
               <Link to="/contact">Contact</Link>
             </li>
           </ul>
@@ -46,7 +49,7 @@ export default function Footer() {
               className="footer-logo-image"
             />
           </div>
-          <p className='punchline'>Navigating Trust, Delivering Excellence </p>
+          {/* <p className='punchline'>Navigating Trust, Delivering Excellence </p> */}
         </div>
       </div>
 

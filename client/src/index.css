@@ -1,9 +1,14 @@
 @import "tailwindcss/preflight";
 @tailwind utilities;
 
-*{
-    font-family: 'futura'; 
-    src: url('fonts/FuturaPTBook.otf') format('otf'),
+@font-face {
+  font-family: 'Rellion';
+  src: url('/fonts/Rellion.otf') format('opentype');
+}
+
+
+* {
+  font-family: 'Rellion', sans-serif;
 }
 
 .app {
