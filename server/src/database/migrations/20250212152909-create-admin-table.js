@@ -1,9 +1,13 @@
-'use strict';
-
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable prettier/prettier */
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { DataTypes } = require('sequelize');
+
 
 module.exports = {
   up: async (queryInterface) => {
+ 
     await queryInterface.createTable('admins', {
       id: {
         type: DataTypes.UUID,

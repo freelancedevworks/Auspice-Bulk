@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -18,10 +19,7 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": [
-    "src/**/*",
-    "server/migrations/**/*"  // Include the migrations directory
-  ],
+"include": ["src", "src/migrations", "test"],
   "exclude": [
     "node_modules"
   ]

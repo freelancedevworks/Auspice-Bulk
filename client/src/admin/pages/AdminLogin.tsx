@@ -1,13 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios'; // Import axios
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; // Import Font Awesome icons
+
 import '../../styles/AdminLogin.css';
+import { API_ENDPOINTS } from '../../constants/api';
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
-    username: '',
+    identifier: '',
     password: ''
   });
+  const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,8 +28,7 @@ export default function AdminLogin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
-    if (!credentials.username || !credentials.password) {
+    if (!credentials.identifier || !credentials.password) {
       toast.error('Please fill in all fields', {
         position: "bottom-center",
         theme: "dark"
@@ -31,23 +37,19 @@ export default function AdminLogin() {
     }
 
     try {
-      // TODO: Replace with actual API call
-      // Temporary mock login
-      if (credentials.username === 'admin' && credentials.password === 'password') {
-        localStorage.setItem('admin_token', 'mock_token');
+      const response = await axios.post(API_ENDPOINTS.AUTH.LOGIN, credentials);
+
+      if (response.data.token) {
+        localStorage.setItem('admin_token', response.data.token);
         toast.success('Login successful!', {
           position: "bottom-center",
           theme: "dark"
         });
         navigate('/admin/dashboard');
-      } else {
-        toast.error('Invalid credentials', {
-          position: "bottom-center",
-          theme: "dark"
-        });
       }
-    } catch {
-      toast.error('Login failed. Please try again.', {
+    } catch (error: any) {
+      console.error('Login error:', error);
+      toast.error(error.response?.data?.message || 'Login failed. Please try again.', {
         position: "bottom-center",
         theme: "dark"
       });
@@ -68,35 +70,49 @@ export default function AdminLogin() {
           </div>
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="identifier">Email or Username</label>
               <input
                 type="text"
-                id="username"
-                name="username"
-                value={credentials.username}
+                id="identifier"
+                name="identifier"
+                value={credentials.identifier}
                 onChange={handleChange}
-                placeholder="Enter your username"
+                placeholder="Enter your email or username"
                 autoComplete="username"
               />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={credentials.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                autoComplete="current-password"
-              />
+              <div className="password-input-container">
+                <input
+                  type={passwordVisible ? 'text' : 'password'} // Toggle input type
+                  id="password"
+                  name="password"
+                  value={credentials.password}
+                  onChange={handleChange}
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility
+                >
+                  <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
+                </button>
+              </div>
             </div>
             <button type="submit" className="login-button">
               Login
             </button>
           </form>
+          <div className="signup-link" style={{ marginTop: '1rem', textAlign: 'center' }}>
+            <Link to="/admin/signup" style={{ color: '#007bff', textDecoration: 'underline' }}>
+              Create new admin account
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
-} 
+}

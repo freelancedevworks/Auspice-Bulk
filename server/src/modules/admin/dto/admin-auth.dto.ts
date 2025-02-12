@@ -10,11 +10,14 @@ export class AdminSignupDto {
   @IsNotEmpty()
   @MinLength(6)
   password: string;
+
+  @IsNotEmpty()
+  companySecretKey: string;
 }
 
 export class AdminLoginDto {
-  @IsEmail()
-  email: string;
+  @IsNotEmpty()
+  identifier: string; // This will be either email or username
 
   @IsNotEmpty()
   password: string;

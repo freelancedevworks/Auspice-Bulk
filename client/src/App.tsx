@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom';
 import AdminDashboard from './admin/pages/AdminDashboard';
 import AdminLogin from './admin/pages/AdminLogin';
+import AdminSignup from './admin/pages/AdminSignup';
 
 function App() {
   return (
@@ -48,10 +49,11 @@ function Main() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/signup" element={<AdminSignup />} />
           </Routes>
         </main>
         {/* Render Footer only if not on the admin page */}
-        {location.pathname !== '/admin' && location.pathname !== '/admin/dashboard' && <Footer />}
+        {!location.pathname.startsWith('/admin') && <Footer />}
       </div>
     </>
   );
