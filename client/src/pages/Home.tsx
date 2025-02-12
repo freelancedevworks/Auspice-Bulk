@@ -27,7 +27,7 @@ export default function Home() {
         secondTextRef.current.style.opacity = shouldAnimate ? '0' : '1';
 
         // Toggle background transition class
-        heroSectionRef.current?.classList.toggle('scrolled', shouldAnimate);
+        // heroSectionRef.current?.classList.toggle('scrolled', shouldAnimate);
       }
     };
 
@@ -58,26 +58,30 @@ export default function Home() {
       <ScrollToTop />
       
       <section ref={heroSectionRef} className="hero-section">
-        <div className="hero-overlay" />
-        
-        <div className="animated-logo">
-          <img 
-            src="https://i.imgur.com/P8ZgtRc.png" 
-            alt="Animated Logo" 
-            loading="eager"
-          />
-        </div>
+      <div className="hero-overlay" />
         
         <div className="section-content">
           <div className="hero-content">
-            <h1 className="hero-title">
-              <span ref={firstTextRef} className="hero-text-part from-left">
-                Navigating Trust
-              </span>
-              <span ref={secondTextRef} className="hero-text-part from-right">
-                Delivering Excellence
-              </span>
-            </h1>
+            <div className="hero-main-content">
+              <div className="animated-logo">
+                <img 
+                  src="https://i.imgur.com/P8ZgtRc.png" 
+                  alt="Animated Logo" 
+                  loading="eager"
+                />
+              </div>
+              <div className="title-container">
+                <h1 className="company-name">AuspiceBulk</h1>
+                <div className="hero-title">
+                  <span ref={firstTextRef} className="hero-text-part from-left">
+                    Navigating Trust
+                  </span>
+                  <span ref={secondTextRef} className="hero-text-part from-right">
+                    Delivering Excellence
+                  </span>
+                </div>
+              </div>
+            </div>
             
             <div className="sailing-soon">
               <Anchor 
@@ -86,7 +90,7 @@ export default function Home() {
                 aria-hidden="true"
               />
               <h2 className="coming-soon-text">
-                Sailing <TypeWriter text="Soon..." speed={180} />
+                Sailing <TypeWriter text="Soon..." speed={100} />
               </h2>
             </div>
             
