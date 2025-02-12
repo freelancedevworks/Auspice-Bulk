@@ -1,21 +1,12 @@
 import { Mail, MapPinHouse } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
+
+//final coming soon UI
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-section brand">
-          <div className="footer-logo">
-            <img
-              src="https://i.imgur.com/bmEeQtF.png"
-              alt="AuspiceBulk DMCC"
-              className="footer-logo-image"
-            />
-          </div>
-          <p className='punchline'>Navigating Trust, Delivering Excellence </p>
-        </div>
-
         <div className="footer-section">
           <h4 className='heading-contact'>Contact</h4>
 
@@ -47,6 +38,16 @@ export default function Footer() {
             </li>
           </ul>
         </div>
+        <div className="footer-section brand">
+          <div className="footer-logo">
+            <img
+              src="https://i.imgur.com/bmEeQtF.png"
+              alt="AuspiceBulk DMCC"
+              className="footer-logo-image"
+            />
+          </div>
+          <p className='punchline'>Navigating Trust, Delivering Excellence </p>
+        </div>
       </div>
 
       <div className="waves-container">
@@ -64,7 +65,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2024 AuspiceBulk DMCC. All rights reserved.</p>
+        <p>&copy; 2025 AuspiceBulk DMCC. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -1,61 +1,51 @@
-import { Anchor, ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ScrollToTop from '../components/ScrollToTop';
+import { useEffect, useRef } from 'react';
+import { ArrowRight, Anchor } from 'lucide-react';
 import TypeWriter from '../components/TypeWriter';
+import ScrollToTop from '../components/ScrollToTop';
 import '../styles/Home.css';
-
+//final coming soon UI
 export default function Home() {
   const navigate = useNavigate();
-  const [key, setKey] = useState(0);
-  // const [isHeadingVisible, setIsHeadingVisible] = useState(false);
+  const heroSectionRef = useRef<HTMLElement>(null);
+  const firstTextRef = useRef<HTMLSpanElement>(null);
+  const secondTextRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const heroSection = document.querySelector('.hero-section');
-      const heading = document.querySelector('.hero-section h1');
-      
-      if (heroSection) {
-        const scrolled = window.scrollY > window.innerHeight * 0.2;
-        if (scrolled) {
-          heroSection.classList.add('scrolled');
-        } else {
-          heroSection.classList.remove('scrolled');
-        }
-      }
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const threshold = windowHeight * 0.3;
 
-      if (heading) {
-        const rect = heading.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-        const isFadingOut = rect.top < window.innerHeight * 0.2;
+      if (firstTextRef.current && secondTextRef.current) {
+        const shouldAnimate = scrollPosition > threshold;
+        
+        // Apply transforms and opacity based on scroll position
+        firstTextRef.current.style.transform = shouldAnimate ? 'translateX(-100%)' : 'translateX(0)';
+        secondTextRef.current.style.transform = shouldAnimate ? 'translateX(100%)' : 'translateX(0)';
+        firstTextRef.current.style.opacity = shouldAnimate ? '0' : '1';
+        secondTextRef.current.style.opacity = shouldAnimate ? '0' : '1';
 
-        if (isVisible && !isFadingOut) {
-          heading.classList.add('visible');
-          heading.classList.remove('fade-out');
-        } else if (isFadingOut) {
-          heading.classList.remove('visible');
-          heading.classList.add('fade-out');
-        } else {
-          heading.classList.remove('visible', 'fade-out');
-        }
+        // Toggle background transition class
+        heroSectionRef.current?.classList.toggle('scrolled', shouldAnimate);
       }
     };
 
-    let timeoutId: NodeJS.Timeout;
-
-    const resetAnimation = () => {
-      setKey(prev => prev + 1);
-      timeoutId = setTimeout(resetAnimation, 5000);
+    // Initial animation setup
+    const initializeAnimation = () => {
+      if (firstTextRef.current && secondTextRef.current) {
+        firstTextRef.current.style.transform = 'translateX(0)';
+        secondTextRef.current.style.transform = 'translateX(0)';
+        firstTextRef.current.style.opacity = '1';
+        secondTextRef.current.style.opacity = '1';
+      }
     };
 
-    resetAnimation();
     window.addEventListener('scroll', handleScroll);
-    // Trigger initial check
-    handleScroll();
+    setTimeout(initializeAnimation, 100);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 
@@ -66,40 +56,50 @@ export default function Home() {
   return (
     <div className="home">
       <ScrollToTop />
-      <section className="hero-section">
-        <div className="hero-overlay"></div>
-        <div key={key} className="animated-logo">
+      
+      <section ref={heroSectionRef} className="hero-section">
+        <div className="hero-overlay" />
+        
+        <div className="animated-logo">
           <img 
             src="https://i.imgur.com/P8ZgtRc.png" 
             alt="Animated Logo" 
             loading="eager"
           />
         </div>
+        
         <div className="section-content">
           <div className="hero-content">
-            <h1>Navigating Trust, Delivering Excellence</h1>
-            {/* <div className="sailing-ship">
-              <img 
-                src="https://i.imgur.com/3mWkVHk.png" 
-                alt="Bulk Ship"
-                className="bulk-ship"
-              />
-            </div> */}
+            <h1 className="hero-title">
+              <span ref={firstTextRef} className="hero-text-part from-left">
+                Navigating Trust
+              </span>
+              <span ref={secondTextRef} className="hero-text-part from-right">
+                Delivering Excellence
+              </span>
+            </h1>
+            
             <div className="sailing-soon">
-              <Anchor size={38} className="anchor-icon" />
+              <Anchor 
+                size={38} 
+                className="anchor-icon" 
+                aria-hidden="true"
+              />
               <h2 className="coming-soon-text">
-                Sailing <TypeWriter text="Soon..." speed={100} delay={3500} />
+                Sailing <TypeWriter text="Soon..." speed={180} />
               </h2>
             </div>
+            
             <button 
               className="cta-button" 
               onClick={handleContactClick}
               aria-label="Contact Us"
             >
-              Contact Us <ArrowRight size={20} />
+              Contact Us <ArrowRight size={20} aria-hidden="true" />
             </button>
           </div>
         </div>
+        
         <div className="waves-container">
           <svg
             className="waves"

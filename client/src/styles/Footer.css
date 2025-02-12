@@ -1,3 +1,5 @@
+/*final css */
+
 .footer {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url('https://images.unsplash.com/photo-1519173141447-38d1c42cf0a7?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -13,7 +15,7 @@
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 8rem 1rem 0;
   display: grid;
@@ -81,12 +83,12 @@
   color: #40c4ff;
   animation: floaty 2s ease-in-out infinite;
 }
-.phone-icon {
+/* .phone-icon {
   padding-bottom: 0.6rem;
   width: 15px;
   color: #40c4ff;
   animation: floaty 2s ease-in-out infinite;
-}
+} */
 .footer-section h4 {
   align-items: center;
   display: flex;
@@ -99,7 +101,7 @@
 .footer-section p {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .footer-section ul {
@@ -212,7 +214,7 @@
   }
 
   .footer-logo-image {
-    width: 100px;
+    width: 200px;
   }
 
   .footer .waves-container {
@@ -227,7 +229,7 @@
   }
 
   .footer-logo-image {
-    width: 90px;
+    width: 180px;
   }
 
   .footer .waves-container {
