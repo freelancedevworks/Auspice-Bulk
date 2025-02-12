@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/AdminDashboard.css';
+import '../../styles/AdminDashboard.css';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();

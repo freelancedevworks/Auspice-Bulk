@@ -6,9 +6,10 @@ import Contact from './pages/Contact';
 import ScrollToTopOnNav from './components/ScrollToTopOnNav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminLogin from './admin/pages/AdminLogin';
+
 import { useLocation } from 'react-router-dom';
 import AdminDashboard from './admin/pages/AdminDashboard';
+import AdminLogin from './admin/pages/AdminLogin';
 
 function App() {
   return (
