@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import AdminDashboard from './admin/pages/AdminDashboard';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminSignup from './admin/pages/AdminSignup';
+import ViewAdmins from './admin/pages/ViewAdmins';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function Main() {
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/signup" element={<AdminSignup />} />
+            <Route path="/admin/view-admins" element={<ViewAdmins />} />
           </Routes>
         </main>
         {/* Render Footer only if not on the admin page */}

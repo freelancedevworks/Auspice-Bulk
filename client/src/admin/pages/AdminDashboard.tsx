@@ -62,9 +62,9 @@ export default function AdminDashboard() {
             <span className="button-icon">👥</span>
             <span className="button-text">Manage Users</span>
           </button>
-          <button className="action-button" onClick={() => navigate('/admin/settings')}>
-            <span className="button-icon">⚙️</span>
-            <span className="button-text">Settings</span>
+          <button className="action-button" onClick={() => navigate('/admin/view-admins')}>
+            <span className="button-icon">👨‍💼</span>
+            <span className="button-text">View Admins</span>
           </button>
         </div>
       </div>
