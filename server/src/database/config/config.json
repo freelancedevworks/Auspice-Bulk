@@ -1,0 +1,10 @@
+{
+  "development": {
+    "dialect": "postgres",
+    "host": "localhost",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "auspice_db",
+    "logging": false
+  }
+}
