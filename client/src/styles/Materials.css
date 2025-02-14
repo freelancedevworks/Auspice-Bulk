@@ -329,8 +329,37 @@
 
 .no-results {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
   color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-subcategories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-subcategories svg {
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 1rem;
+}
+
+.empty-subcategories p {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.empty-subcategories .empty-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive adjustments */

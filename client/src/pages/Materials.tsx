@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { debounce } from 'lodash';
-import { ChevronDown, ChevronUp, Search, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, Search, X, FolderOpen } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import ScrollToTop from '../components/ScrollToTop';
@@ -66,16 +66,27 @@ export default function Materials() {
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(material => {
-        const matchInType = material.type.toLowerCase().includes(query);
-        const matchInDescription = material.description.toLowerCase().includes(query);
-        const matchInSubcategories = material.subcategories.some(
-          sub =>
-            sub.name.toLowerCase().includes(query) ||
-            sub.description.toLowerCase().includes(query)
+      return filtered.map(material => {
+        const matchingSubcategories = material.subcategories.filter(sub =>
+          sub.name.toLowerCase().includes(query) ||
+          sub.description.toLowerCase().includes(query)
         );
-        return matchInType || matchInDescription || matchInSubcategories;
-      });
+
+        if (
+          material.type.toLowerCase().includes(query) ||
+          material.description.toLowerCase().includes(query) ||
+          matchingSubcategories.length > 0
+        ) {
+          if (matchingSubcategories.length > 0 && !material.type.toLowerCase().includes(query)) {
+            return {
+              ...material,
+              subcategories: matchingSubcategories,
+            };
+          }
+          return material;
+        }
+        return null;
+      }).filter(Boolean) as MaterialType[];
     }
 
     return filtered;
@@ -146,7 +157,7 @@ export default function Materials() {
       <div className="materials-grid">
         {loading ? (
           <div className="loading-container">
-            <div className="loading-spinner">Loading materials...</div>
+            <div className="loader"></div>
           </div>
         ) : filteredMaterials.length === 0 ? (
           <div className="no-results">
@@ -171,21 +182,29 @@ export default function Materials() {
               </div>
 
               <div className={`subcategories ${expandedCards.has(material.id) ? 'expanded' : ''}`}>
-                {material.subcategories.map(sub => (
-                  <div
-                    key={sub.id}
-                    className="subcategory-card"
-                    onClick={() => setSelectedMaterial(sub)}
-                  >
-                    <div className="subcategory-image">
-                      <img src={sub.image} alt={sub.name} loading="lazy" />
-                    </div>
-                    <div className="subcategory-info">
-                      <h3>{sub.name}</h3>
-                      <p>{sub.description}</p>
-                    </div>
+                {material.subcategories.length === 0 ? (
+                  <div className="empty-subcategories">
+                    <FolderOpen size={48} />
+                    <p>No subcategories available for this material</p>
+                    <p className="empty-subtitle">Check back later for updates</p>
                   </div>
-                ))}
+                ) : (
+                  material.subcategories.map(sub => (
+                    <div
+                      key={sub.id}
+                      className="subcategory-card"
+                      onClick={() => setSelectedMaterial(sub)}
+                    >
+                      <div className="subcategory-image">
+                        <img src={sub.image} alt={sub.name} loading="lazy" />
+                      </div>
+                      <div className="subcategory-info">
+                        <h3>{sub.name}</h3>
+                        <p>{sub.description}</p>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           ))
