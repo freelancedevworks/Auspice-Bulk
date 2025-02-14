@@ -7,6 +7,9 @@ export const API_ENDPOINTS = {
   },
   ADMIN: {
     LIST: `${API_BASE_URL}/admin/list`,
+  },
+  MATERIALS: {
+    LIST: `${API_BASE_URL}/materials`,
   }
   // Add other endpoints as needed
 };
