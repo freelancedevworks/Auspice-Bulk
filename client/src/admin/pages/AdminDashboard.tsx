@@ -58,9 +58,9 @@ export default function AdminDashboard() {
             <span className="button-icon">📦</span>
             <span className="button-text">View Orders</span>
           </button>
-          <button className="action-button" onClick={() => navigate('/admin/manage-users')}>
-            <span className="button-icon">👥</span>
-            <span className="button-text">Manage Users</span>
+          <button className="action-button" onClick={() => navigate('/admin/view-materials')}>
+            <span className="button-icon">📋</span>
+            <span className="button-text">View Materials</span>
           </button>
           <button className="action-button" onClick={() => navigate('/admin/view-admins')}>
             <span className="button-icon">👨‍💼</span>

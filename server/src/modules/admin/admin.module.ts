@@ -5,6 +5,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Admin } from './admin.model';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from '../auth/auth.module';
+import { CloudinaryService } from 'src/services/cloudinary.service';
+// Import CloudinaryService directly
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { AuthModule } from '../auth/auth.module';
     AuthModule,
   ],
   controllers: [AdminController],
-  providers: [AdminService],
+  providers: [AdminService, CloudinaryService], // Add CloudinaryService to the providers array
   exports: [AdminService],
 })
 export class AdminModule {}

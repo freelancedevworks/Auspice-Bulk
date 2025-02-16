@@ -13,6 +13,8 @@ import AdminDashboard from './admin/pages/AdminDashboard';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminSignup from './admin/pages/AdminSignup';
 import ViewAdmins from './admin/pages/ViewAdmins';
+import AdminMaterials from './admin/pages/AdminMaterials';
+import { AdminGuard } from './admin/components/AdminGuard';
 
 function App() {
   return (
@@ -47,15 +49,24 @@ function Main() {
         <Navbar />
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/signup" element={<AdminSignup />} />
-            <Route path="/admin/view-admins" element={<ViewAdmins />} />
-            <Route path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/materials" element={<Materials />} />
+            {/* Public routes */}
+            <Route path="/" element={<Main />}>
+              <Route index element={<Home />} />
+              <Route path="materials" element={<Materials />} />
+              {/* <Route path="about" element={<About />} /> */}
+              <Route path="contact" element={<Contact />} />
+            </Route>
+
+            {/* Admin routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            
+            {/* Protected admin routes */}
+            <Route element={<AdminGuard />}>
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/view-materials" element={<AdminMaterials />} />
+              <Route path="/admin/signup" element={<AdminSignup />} />
+              <Route path="/admin/view-admins" element={<ViewAdmins />} />
+            </Route>
           </Routes>
         </main>
         {/* Render Footer only if not on the admin page */}
