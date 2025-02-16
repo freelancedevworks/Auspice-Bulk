@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -25,7 +25,7 @@ function App() {
 }
 
 function Main() {
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
 
   return (
     <>
@@ -50,14 +50,12 @@ function Main() {
         <main>
           <Routes>
             {/* Public routes */}
-            <Route path="/" element={<Main />}>
-              <Route index element={<Home />} />
-              <Route path="materials" element={<Materials />} />
-              {/* <Route path="about" element={<About />} /> */}
-              <Route path="contact" element={<Contact />} />
-            </Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/materials" element={<Materials />} />
+            <Route path="/contact" element={<Contact />} />
 
-            {/* Admin routes */}
+            {/* Redirect /admin to /admin/login */}
+            <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             
             {/* Protected admin routes */}
@@ -67,8 +65,12 @@ function Main() {
               <Route path="/admin/signup" element={<AdminSignup />} />
               <Route path="/admin/view-admins" element={<ViewAdmins />} />
             </Route>
+
+            {/* Catch-all for unknown routes */}
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </main>
+        
         {/* Render Footer only if not on the admin page */}
         {!location.pathname.startsWith('/admin') && <Footer />}
       </div>

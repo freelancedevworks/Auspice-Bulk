@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { debounce } from 'lodash';
-import { ChevronDown, ChevronUp, Search, X, FolderOpen } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ChevronDown, ChevronUp, FolderOpen, Search, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import ScrollToTop from '../components/ScrollToTop';
 import { API_ENDPOINTS } from '../constants/api';
@@ -36,6 +36,7 @@ export default function Materials() {
       try {
         setLoading(true);
         const response = await axios.get<MaterialType[]>(API_ENDPOINTS.MATERIALS.LIST);
+        console.log(response.data);
         setMaterials(response.data);
       } catch (error) {
         console.error('Error fetching materials:', error);
@@ -49,12 +50,14 @@ export default function Materials() {
   }, []);
 
   // Debounced search handler
-  const debouncedSearch = useCallback(
-    debounce((query: string) => {
-      setSearchQuery(query);
-    }, 300),
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        setSearchQuery(query);
+      }, 300),
     []
   );
+  
 
   // Filter materials based on search and category
   const filteredMaterials = useMemo(() => {
