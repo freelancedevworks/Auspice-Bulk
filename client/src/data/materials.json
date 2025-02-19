@@ -1,0 +1,130 @@
+{
+  "materials": [
+    {
+      "type": "Coal",
+      "description": "Coal is a combustible black or brownish-black sedimentary rock used as a fuel source in industries, power generation, and metallurgy.",
+      "subcategories": [
+        {
+          "id": 1,
+          "name": "Coking Coal",
+          "image": "https://images.unsplash.com/photo-1620331311520-246422fd82f9?w=800",
+          "description": "Used primarily in steel production due to its high carbon content and low ash residue."
+        },
+        {
+          "id": 2,
+          "name": "Thermal Coal",
+          "image": "https://images.unsplash.com/photo-1599465929696-7e0c32651094?w=800",
+          "description": "Mainly used for electricity generation in power plants through combustion."
+        },
+        {
+          "id": 3,
+          "name": "Pet Coke",
+          "image": "https://images.unsplash.com/photo-1582120031356-c4e4cca27304?w=800",
+          "description": "A carbon-rich solid derived from oil refining, used as a fuel and in industrial processes."
+        },
+        {
+          "id": 4,
+          "name": "Lam Coke",
+          "image": "https://images.unsplash.com/photo-1578398832738-b5a1e1bf4f4f?w=800",
+          "description": "Low-ash metallurgical coke used in the ferroalloy industry and blast furnaces."
+        }
+      ]
+    },
+    {
+      "type": "Mineral Ores",
+      "description": "Mineral ores are naturally occurring solid materials from which metals or minerals can be profitably extracted.",
+      "subcategories": [
+        {
+          "id": 5,
+          "name": "Iron Ore",
+          "image": "https://images.unsplash.com/photo-1605020420620-20c943cc4669?w=800",
+          "description": "A key raw material in steel production, containing iron minerals like hematite and magnetite."
+        },
+        {
+          "id": 6,
+          "name": "Bauxite",
+          "image": "https://images.unsplash.com/photo-1598228723793-52759bba239c?w=800",
+          "description": "An ore rich in aluminum, processed to produce alumina and eventually aluminum metal."
+        },
+        {
+          "id": 7,
+          "name": "Limestone",
+          "image": "https://images.unsplash.com/photo-1582490841511-81e1363fb48c?w=800",
+          "description": "A sedimentary rock used in cement production, steel manufacturing, and soil conditioning."
+        },
+        {
+          "id": 8,
+          "name": "Gypsum",
+          "image": "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=800",
+          "description": "A mineral used in plaster, drywall, and cement manufacturing."
+        }
+      ]
+    },
+    {
+      "type": "Construction Materials",
+      "description": "Construction materials include raw materials used in building infrastructure and structures.",
+      "subcategories": [
+        {
+          "id": 9,
+          "name": "Clay",
+          "image": "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800",
+          "description": "A natural material used in ceramics, bricks, and pottery production."
+        },
+        {
+          "id": 10,
+          "name": "Clinker",
+          "image": "https://images.unsplash.com/photo-1518893883800-45cd0954574b?w=800",
+          "description": "An intermediate product in cement manufacturing, produced by heating limestone and clay."
+        }
+      ]
+    },
+    {
+      "type": "Fertilizers",
+      "description": "Fertilizers are substances used to enhance soil fertility and promote plant growth.",
+      "subcategories": [
+        {
+          "id": 11,
+          "name": "DAP (Diammonium Phosphate)",
+          "image": "https://images.unsplash.com/photo-1587383378486-83c667ff6905?w=800",
+          "description": "A widely used phosphorus fertilizer that enhances root development and crop yield."
+        },
+        {
+          "id": 12,
+          "name": "Urea",
+          "image": "https://images.unsplash.com/photo-1599708153386-62bf3f03377b?w=800",
+          "description": "A nitrogen-rich fertilizer essential for plant growth and increased agricultural productivity."
+        },
+        {
+          "id": 13,
+          "name": "Rock Phosphate",
+          "image": "https://images.unsplash.com/photo-1518527989017-5baca7537f25?w=800",
+          "description": "A natural mineral used as a source of phosphorus in organic farming."
+        }
+      ]
+    },
+    {
+      "type": "Others",
+      "description": "Other materials that do not fit into primary categories but are essential for various industries.",
+      "subcategories": [
+        {
+          "id": 14,
+          "name": "Logs",
+          "image": "https://images.unsplash.com/photo-1504280317859-8d2f242c3929?w=800",
+          "description": "Timber logs used in construction, furniture making, and paper production."
+        },
+        {
+          "id": 15,
+          "name": "Steel Products",
+          "image": "https://images.unsplash.com/photo-1535813547-99c456a41d4a?w=800",
+          "description": "Processed steel used in infrastructure, automobile, and machinery industries."
+        },
+        {
+          "id": 16,
+          "name": "Silica Sand",
+          "image": "https://images.unsplash.com/photo-1582130739531-1c8fff346d12?w=800",
+          "description": "A high-purity sand used in glass making, casting, and industrial applications."
+        }
+      ]
+    }
+  ]
+}

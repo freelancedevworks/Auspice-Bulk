@@ -34,11 +34,15 @@ export default function Footer() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/materials">Materials</Link>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/materials">Products</Link>
             </li>
             <li>
               <Link to="/contact">Contact</Link>
             </li>
+            
           </ul>
         </div>
         <div className="footer-section brand">
