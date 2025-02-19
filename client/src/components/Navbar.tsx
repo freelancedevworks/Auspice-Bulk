@@ -62,11 +62,18 @@ export default function Navbar() {
             HOME
           </Link>
           <Link
+            to="/about"
+            className={location.pathname === '/about' ? 'active' : ''}
+            onClick={() => setIsOpen(false)}
+          >
+            ABOUT
+          </Link>
+          <Link
             to="/materials"
             className={location.pathname === '/materials' ? 'active' : ''}
             onClick={() => setIsOpen(false)}
           >
-            MATERIALS
+            PRODUCTS
           </Link>
           <Link
             to="/contact"
