@@ -7,21 +7,32 @@ export default function About() {
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
+    // Add initial visible class to prevent scroll lock
+    sectionRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.classList.add('pre-animation');
+        // Stagger the actual animations
+        setTimeout(() => {
+          ref.classList.remove('pre-animation');
+          ref.classList.add('visible');
+        }, index * 200);
+      }
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Add visible class with a slight delay based on index
           if (entry.isIntersecting) {
             const index = sectionRefs.current.findIndex(ref => ref === entry.target);
             setTimeout(() => {
               entry.target.classList.add('visible');
-            }, index * 200); // Stagger the animations
+            }, index * 200);
           }
         });
       },
       {
-        threshold: 0.15, // Increased threshold for smoother trigger
-        rootMargin: '0px', // Adjusted to trigger closer to viewport
+        threshold: 0.15,
+        rootMargin: '0px',
       }
     );
 

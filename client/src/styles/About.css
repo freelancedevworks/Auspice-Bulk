@@ -604,3 +604,12 @@
       backdrop-filter: blur(5px);
     }
   }
+  
+  /* Add these styles for pre-animation state */
+  .about-section.pre-animation,
+  .vision-section.pre-animation,
+  .mission-section.pre-animation {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }

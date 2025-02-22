@@ -92,15 +92,25 @@ export default function Materials() {
   };
 
   const handleSidebarClick = (type: string) => {
-    setSidebarSelectedType(prevType => prevType === type ? null : type);
+    // Toggle the selected type
+    setSidebarSelectedType(prevType => {
+      const newType = prevType === type ? null : type;
+      
+      // Update expanded types based on selection
+      if (newType === null) {
+        setCardExpandedTypes(prev => prev.filter(t => t !== type));
+        setExpandedGrid(false);
+      } else {
+        if (!cardExpandedTypes.includes(type)) {
+          setCardExpandedTypes(prev => [...prev, type]);
+          setExpandedGrid(true);
+        }
+      }
+      
+      return newType;
+    });
     
-    // First expand the card if it's not already expanded
-    if (!cardExpandedTypes.includes(type)) {
-      setCardExpandedTypes(prev => [...prev, type]);
-      setExpandedGrid(true);
-    }
-    
-    // Wait for the expansion animation to start
+    // Scroll after state updates
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         scrollToType(type);
@@ -132,6 +142,29 @@ export default function Materials() {
   };
 
   const isCardExpanded = (type: string) => cardExpandedTypes.includes(type);
+
+  // Add loading state for images
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+  const handleImageLoad = (imageUrl: string) => {
+    setLoadedImages(prev => new Set(prev).add(imageUrl));
+  };
+
+  // Update the image rendering in sidebar and cards
+  const renderImage = (imageUrl: string, alt: string, className?: string) => (
+    <div className={`image-container ${className || ''}`}>
+      {!loadedImages.has(imageUrl) && (
+        <div className="image-placeholder pulse" />
+      )}
+      <img
+        src={imageUrl}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => handleImageLoad(imageUrl)}
+        className={loadedImages.has(imageUrl) ? 'loaded' : ''}
+      />
+    </div>
+  );
 
   return (
     <div className="materials-page">
@@ -230,11 +263,11 @@ export default function Materials() {
                 >
                   <div className="type-header-content">
                     <div className="type-image">
-                      <img 
-                        src={material.subcategories[0]?.image} 
-                        alt={material.type}
-                        loading="lazy"
-                      />
+                      {renderImage(
+                        material.subcategories[0]?.image,
+                        material.type,
+                        'sidebar-image'
+                      )}
                       <div className="type-image-overlay" />
                     </div>
                     <div className="type-text">
@@ -263,7 +296,7 @@ export default function Materials() {
                       style={{ '--card-index': index } as React.CSSProperties}
                     >
                       <div className="material-image">
-                        <img src={subcategory.image} alt={subcategory.name} loading="lazy" />
+                        {renderImage(subcategory.image, subcategory.name)}
                       </div>
                       <div className="material-info">
                         <h4>{subcategory.name}</h4>
