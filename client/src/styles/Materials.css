@@ -198,6 +198,9 @@
   height: fit-content;
   position: sticky;
   top: calc(var(--navbar-height, 80px) + 2rem);
+  margin-top: 2rem;
+  max-height: calc(100vh - var(--navbar-height, 80px) - 4rem);
+  overflow-y: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -456,25 +459,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  padding: 0;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1.5rem;
   background: rgba(0, 0, 0, 0.2);
-  transform: translateY(-20px);
+  border-radius: 0 0 20px 20px;
   width: 100%;
 }
 
 .materials-list.expanded {
-  max-height: 2000px;
-  opacity: 1;
-  padding: 1.5rem;
-  transform: translateY(0);
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   width: 100%;
-  border-radius: 0 0 20px 20px;
 }
 
 /* Material Card */
@@ -483,13 +477,8 @@
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
-  opacity: 1;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation-delay: calc(var(--card-index) * 0.1s);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
 }
 
@@ -679,4 +668,23 @@
   .materials-grid.expanded .type-text h3 {
     font-size: 1.75rem;
   }
+}
+
+/* Add smooth scrollbar for sidebar */
+.materials-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.materials-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.materials-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(64, 196, 255, 0.3);
+  border-radius: 4px;
+}
+
+.materials-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(64, 196, 255, 0.5);
 }

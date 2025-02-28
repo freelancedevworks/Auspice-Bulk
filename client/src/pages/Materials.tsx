@@ -3,6 +3,7 @@ import { ChevronRight, Package2, Search, Plus, Minus } from 'lucide-react';
 import materialsData from '../data/materials.json';
 import ScrollToTop from '../components/ScrollToTop';
 import '../styles/Materials.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Subcategory {
   id: number;
@@ -16,6 +17,38 @@ interface MaterialType {
   description: string;
   subcategories: Subcategory[];
 }
+
+// Add these animation variants
+const listVariants = {
+  hidden: { 
+    opacity: 0,
+    height: 0
+  },
+  visible: { 
+    opacity: 1,
+    height: 'auto',
+    transition: {
+      duration: 0.4,
+      ease: "easeInOut",
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut"
+    }
+  }
+};
 
 export default function Materials() {
   const [sidebarSelectedType, setSidebarSelectedType] = useState<string | null>(null);
@@ -197,18 +230,34 @@ export default function Materials() {
                     className={`chevron-icon ${sidebarSelectedType === material.type ? 'rotate' : ''}`}
                   />
                 </button>
-                <div className={`sidebar-subcategories ${sidebarSelectedType === material.type ? 'show' : ''}`}>
-                  {material.subcategories.map((sub, index) => (
-                    <button
-                      key={sub.id}
-                      className="subcategory-item"
-                      onClick={() => setSelectedMaterial(sub)}
-                      style={{ '--item-index': index } as React.CSSProperties}
+                <AnimatePresence>
+                  {sidebarSelectedType === material.type && (
+                    <motion.div
+                      className="sidebar-subcategories show"
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      variants={listVariants}
                     >
-                      {sub.name}
-                    </button>
-                  ))}
-                </div>
+                      {material.subcategories.map((sub, index) => (
+                        <motion.button
+                          key={sub.id}
+                          className="subcategory-item"
+                          onClick={() => setSelectedMaterial(sub)}
+                          variants={itemVariants}
+                          style={{ '--item-index': index } as React.CSSProperties}
+                          whileHover={{ 
+                            x: 10,
+                            color: '#40c4ff',
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          {sub.name}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </nav>
@@ -254,24 +303,41 @@ export default function Materials() {
                   </div>
                 </div>
 
-                <div className={`materials-list ${isCardExpanded(material.type) ? 'expanded' : ''}`}>
-                  {material.subcategories.map((subcategory, index) => (
-                    <div
-                      key={subcategory.id}
-                      className="material-card"
-                      onClick={() => setSelectedMaterial(subcategory)}
-                      style={{ '--card-index': index } as React.CSSProperties}
+                <AnimatePresence>
+                  {isCardExpanded(material.type) && (
+                    <motion.div
+                      className={`materials-list expanded`}
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      variants={listVariants}
                     >
-                      <div className="material-image">
-                        <img src={subcategory.image} alt={subcategory.name} loading="lazy" />
-                      </div>
-                      <div className="material-info">
-                        <h4>{subcategory.name}</h4>
-                        <p>{subcategory.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                      {material.subcategories.map((subcategory, index) => (
+                        <motion.div
+                          key={subcategory.id}
+                          className="material-card"
+                          onClick={() => setSelectedMaterial(subcategory)}
+                          variants={itemVariants}
+                          style={{ '--card-index': index } as React.CSSProperties}
+                          whileHover={{ 
+                            scale: 1.02, 
+                            y: -8,
+                            transition: { duration: 0.2 }
+                          }}
+                          whileTap={{ scale: 1.01 }}
+                        >
+                          <div className="material-image">
+                            <img src={subcategory.image} alt={subcategory.name} loading="lazy" />
+                          </div>
+                          <div className="material-info">
+                            <h4>{subcategory.name}</h4>
+                            <p>{subcategory.description}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>
