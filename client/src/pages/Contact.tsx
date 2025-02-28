@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from '../components/ScrollToTop';
 import TypeWriter from '../components/TypeWriter';
 import '../styles/Contact.css';
+import emailjs from '@emailjs/browser';
 //final coming soon UI
 interface FormData {
   name: string;
@@ -78,7 +79,7 @@ export default function Contact() {
     return /^\+\d{1,4}\d{8,}$/.test(fullPhone);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Required fields validation
@@ -111,15 +112,47 @@ export default function Contact() {
       return;
     }
 
-    // Success handling
-    toast.success('Message sent successfully!', {
-      position: "bottom-center",
-      autoClose: 2000,
-      theme: "dark"
-    });
+    try {
+      // Show loading toast
+      const loadingToast = toast.loading('Sending message...', {
+        position: "bottom-center",
+        theme: "dark"
+      });
 
-    // Reset form
-    setFormData(INITIAL_FORM_STATE);
+      // Prepare phone number
+      const fullPhone = formData.phone ? `${formData.countryCode}${formData.phone}` : 'Not provided';
+
+      // Send email using EmailJS
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: fullPhone,
+          message: formData.message,
+        },
+        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      );
+
+      // Dismiss loading toast and show success
+      toast.dismiss(loadingToast);
+      toast.success('Message sent successfully!', {
+        position: "bottom-center",
+        autoClose: 2000,
+        theme: "dark"
+      });
+
+      // Reset form
+      setFormData(INITIAL_FORM_STATE);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast.error('Failed to send message. Please try again later.', {
+        position: "bottom-center",
+        autoClose: 2000,
+        theme: "dark"
+      });
+    }
   };
 
   const handleChange = (
