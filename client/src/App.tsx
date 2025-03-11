@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Materials from './pages/Materials';
+import Materials from './pages/Products';
 import ScrollToTopOnNav from './components/ScrollToTopOnNav';
 
 function App() {

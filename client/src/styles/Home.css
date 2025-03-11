@@ -56,23 +56,6 @@ section {
   background-position: center;
 }
 
-/* .hero-section::before {
- 
-  opacity: 1;
-  z-index: 0;
-  filter: blur(1.5px);
-} */
-
-/* .hero-section::after {
-  background-image: url('../assets/2.jpg');
-  opacity: 0;
-  z-index: 0;
-  filter: blur(1.5px);
-} */
-
-/* .hero-section.scrolled::before { opacity: 0; }
-.hero-section.scrolled::after { opacity: 1; } */
-
 /* Hero Overlay */
 .hero-overlay {
   position: absolute;
@@ -282,6 +265,158 @@ section {
 .cta-button:active {
   transform: translateY(1px) translateZ(0);
 }
+
+/* Previews Section */
+.previews-section {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95)),
+    url('https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2829&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.previews-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.previews-container::-webkit-scrollbar {
+  display: none;
+}
+
+.preview-card {
+  flex: 0 0 calc(33.333% - 1.333rem);
+  min-height: 500px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: translateZ(0);
+  opacity: 0;
+  transform: translateX(50px);
+  animation: slideInFromRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.preview-card:nth-child(1) { animation-delay: 0.2s; }
+.preview-card:nth-child(2) { animation-delay: 0.4s; }
+.preview-card:nth-child(3) { animation-delay: 0.6s; }
+
+.preview-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(64, 196, 255, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.preview-image {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.preview-card:hover .preview-image img {
+  transform: scale(1.1);
+}
+
+.preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.6)
+  );
+  transition: opacity 0.3s ease;
+}
+
+.preview-card:hover .preview-overlay {
+  opacity: 0.8;
+}
+
+.preview-content {
+  padding: 2rem;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.preview-content h3 {
+  font-size: 1.75rem;
+  color: #40c4ff;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: calc(var(--index) * 0.2s + 0.6s);
+}
+
+.preview-content p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: calc(var(--index) * 0.2s + 0.8s);
+}
+
+.preview-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #40c4ff;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: calc(var(--index) * 0.2s + 1s);
+}
+
+.preview-card:hover .preview-link {
+  transform: translateX(10px);
+}
+
+.preview-link svg {
+  transition: transform 0.3s ease;
+}
+
+.preview-card:hover .preview-link svg {
+  transform: translateX(5px);
+}
+
 /* Animations */
 @keyframes wave-move {
   0% { transform: translate3d(-90px, 0, 0); }
@@ -309,10 +444,34 @@ section {
   }
 }
 
-/* Media Queries */
-/* Media Queries */
+@keyframes bounce {
+  0%, 100% { transform: rotate(-90deg) translateX(0); }
+  50% { transform: rotate(-90deg) translateX(-5px); }
+}
 
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries */
 /* Desktop (1200px to 1399px) */
 @media screen and (max-width: 1399px) {
   .section-content {
@@ -404,6 +563,19 @@ section {
   .waves-container {
     height: 100px;
   }
+  
+  .preview-card {
+    flex: 0 0 350px;
+    min-height: 450px;
+  }
+
+  .preview-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .preview-content p {
+    font-size: 1rem;
+  }
 }
 
 /* Large Mobile (576px to 767px) */
@@ -445,6 +617,19 @@ section {
   
   .waves-container {
     height: 80px;
+  }
+  
+  .preview-card {
+    flex: 0 0 300px;
+    min-height: 400px;
+  }
+
+  .preview-image {
+    height: 200px;
+  }
+
+  .preview-content {
+    padding: 1.5rem;
   }
 }
 
@@ -499,6 +684,24 @@ section {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
   }
+  
+  .preview-card {
+    flex: 0 0 280px;
+    min-height: 380px;
+  }
+
+  .preview-content {
+    padding: 1.25rem;
+  }
+
+  .preview-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .preview-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* Height-based Media Queries */
@@ -536,9 +739,61 @@ section {
   }
 }
 
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .preview-card:hover {
+    transform: none;
+  }
+
+  .preview-card:active {
+    transform: scale(0.98);
+  }
+}
+
 /* iOS Safari Fix */
 @supports (-webkit-touch-callout: none) {
   .hero-section {
     height: -webkit-fill-available;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .preview-card {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .preview-card {
+    flex: 0 0 calc(100% - 2rem);
+    min-height: 450px;
+  }
+
+  .preview-image {
+    height: 200px;
+  }
+
+  .preview-content {
+    padding: 1.5rem;
+  }
+
+  .preview-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .preview-content p {
+    font-size: 1rem;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .preview-card:hover {
+    transform: none;
+  }
+
+  .preview-card:active {
+    transform: scale(0.98);
   }
 }
