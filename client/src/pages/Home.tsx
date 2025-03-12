@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { ArrowRight, ChevronRight, Mail, Package2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { ArrowRight, Anchor, ChevronRight, Package2, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 // import TypeWriter from '../components/TypeWriter';
 import ScrollToTop from '../components/ScrollToTop';
 import '../styles/Home.css';
