@@ -6,6 +6,7 @@ import ScrollToTop from '../components/ScrollToTop';
 import TypeWriter from '../components/TypeWriter';
 import '../styles/Contact.css';
 import emailjs from '@emailjs/browser';
+import { emailjsConfig } from '../config/emailjs';
 //final coming soon UI
 interface FormData {
   name: string;
@@ -113,26 +114,24 @@ export default function Contact() {
     }
 
     try {
-      // Show loading toast
       const loadingToast = toast.loading('Sending message...', {
         position: "bottom-center",
         theme: "dark"
       });
 
-      // Prepare phone number
       const fullPhone = formData.phone ? `${formData.countryCode}${formData.phone}` : 'Not provided';
 
-      // Send email using EmailJS
+      // Send email using EmailJS with config
       await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
         {
           name: formData.name,
           email: formData.email,
           phone: fullPhone,
           message: formData.message,
         },
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+        emailjsConfig.publicKey
       );
 
       // Dismiss loading toast and show success
