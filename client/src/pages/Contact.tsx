@@ -13,6 +13,7 @@ interface FormData {
   email: string;
   countryCode: string;
   phone: string;
+  subject: string;
   message: string;
 }
 
@@ -21,6 +22,7 @@ const INITIAL_FORM_STATE: FormData = {
   email: '',
   countryCode: '+971',
   phone: '',
+  subject: '',
   message: ''
 };
 
@@ -113,12 +115,13 @@ export default function Contact() {
       return;
     }
 
-    try {
-      const loadingToast = toast.loading('Sending message...', {
-        position: "bottom-center",
-        theme: "dark"
-      });
+    // Create loading toast
+    const loadingToast = toast.loading('Sending message...', {
+      position: "bottom-center",
+      theme: "dark"
+    });
 
+    try {
       const fullPhone = formData.phone ? `${formData.countryCode}${formData.phone}` : 'Not provided';
 
       // Send email using EmailJS with config
@@ -126,10 +129,12 @@ export default function Contact() {
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
         {
-          name: formData.name,
-          email: formData.email,
-          phone: fullPhone,
+          from_name: formData.name,
+          from_email: formData.email,
+          phone_number: fullPhone,
+          subject: formData.subject || 'Contact Form Inquiry',
           message: formData.message,
+          reply_to: formData.email,
         },
         emailjsConfig.publicKey
       );
@@ -146,6 +151,10 @@ export default function Contact() {
       setFormData(INITIAL_FORM_STATE);
     } catch (error) {
       console.error('Error sending email:', error);
+      
+      // Make sure to dismiss the loading toast before showing the error
+      toast.dismiss(loadingToast);
+      
       toast.error('Failed to send message. Please try again later.', {
         position: "bottom-center",
         autoClose: 2000,
@@ -304,6 +313,18 @@ export default function Contact() {
                       className="phone-number-input"
                     />
                   </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="subject">Subject</label>
+                  <input
+                    id="subject"
+                    name="subject"
+                    type="text"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Enter subject"
+                  />
                 </div>
 
                 <div className="form-group full-width">
